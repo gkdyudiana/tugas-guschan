@@ -21,7 +21,15 @@
     <!-- Login Area -->
 
     <div class="container-fluid">
-        <h2 class="text-center p-3">Sistem Informasi <br> Go - Class</h2>
+        <h2 class="text-center p-3">Sistem Informasi <br> Online Pelajar</h2>
+        <?php if (isset($_SESSION['error'])) { ?>
+            <div class="alert alert-danger" role="alert">
+                <?= $_SESSION['error']; ?>
+            </div>
+        <?php
+            unset($_SESSION['error']);
+        }
+        ?>
         <form action="<?= BASEURL; ?>/auth/middleware" method="POST">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
@@ -37,13 +45,6 @@
     </div>
 
     <!-- End Login Area -->
-
-    <?php
-    if (isset($_SESSION['error'])) {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    }
-    ?>
 
 
 
