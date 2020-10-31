@@ -41,16 +41,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">E-Book</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-block btn-outline-danger" href="<?= BASEURL; ?>/auth/logout">SIGN OUT</a>
+                        <a class="btn btn-block btn-outline-danger" href="<?= BASEURL; ?>/auth/logout">KELUAR</a>
                     </li>
                 </ul>
             </div>
@@ -58,7 +55,7 @@
     </nav>
 
     <div class="jumbotron bg-transparent" data-aos="fade-right" data-aos-duration="2000">
-        <h1 class="display-4 text-center text-danger"></h1>
+        <h1 class="display-4 text-center text-dark"></h1>
     </div>
 
     <!-- End Navbar -->
@@ -74,15 +71,34 @@
         <div class="row justify-content-center">
             <div class="col-lg-4 border d-flex align-items-center flex-column p-4">
                 <img src="<?= IMAGES; ?>/user-profiles/user.png" width="150" alt="">
-                <h2 class="text-dark pt-3"><?= $_SESSION['auth']['name']; ?></h2>
+                <a href="<?= BASEURL; ?>/dashboard/update" class="badge badge-pill badge-success p-2 mt-3"><i class="fas fa-edit"></i>&nbsp;ubah biodata</a>
+                <h2 class="text-dark pt-2 text-center"><?= $_SESSION['auth']['name']; ?></h2>
             </div>
             <div class="col-lg-8 bg-primary p-4 rounded-right">
                 <table class="biodata" border="0">
                     <tr>
-                        <td>Email : <?= $_SESSION['auth']['email']; ?></td>
+                        <td>Nomor induk : <?= $data['nomor_induk']; ?></td>
                     </tr>
                     <tr>
-                        <td>Token : <?= $_SESSION['auth']['token']; ?></td>
+                        <td>Email : <?= $data['email']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Lahir : <?= $data['birth_date']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Tempat Lahir : <?= $data['birth_place']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Jenis kelamin : <?= $data['gender'] ?></td>
+                    </tr>
+                    <tr>
+                        <td>Agama : <?= $data['religion']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Alamat : <?= $data['address']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>No. Telp : <?= $data['telp']; ?></td>
                     </tr>
                 </table>
             </div>
@@ -94,7 +110,7 @@
             <div class="col-lg-4" data-aos="fade-right" data-aos-duration="2000">
                 <div class="card mb-3" style="width: 100%;">
                     <div class="card-header text-center bg-primary text-white">
-                        Jadwal Kuliah
+                        Mata Pelajaran
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Basis Data</li>
@@ -128,8 +144,6 @@
 
 
 
-
-
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
@@ -147,7 +161,7 @@
         AOS.init();
 
         var typed = new Typed('.display-4', {
-            strings: ["Selamat Datang <br> <?= $_SESSION['auth']['name']; ?>", "Di Sistem Informasi <br> Online Pelajar"],
+            strings: ["Selamat Datang <br> <?= $_SESSION['auth']['name']; ?>", "Di Sistem Informasi<br>Online Pelajar"],
             typeSpeed: 150,
             loop: true,
             showCursor: false

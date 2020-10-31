@@ -26,31 +26,33 @@ class Auth extends Controller
             ];
 
             if (preg_match('/[\'^£$%&*()}";:!`{#~?><>,|=_+¬-]/', $data['email'])) {
-                $_SESSION['error'] = "Email / Password tidak valid!";
+                $_SESSION['error'] = "Email / Nomor Induk / Password tidak valid!";
                 header('Location: ' . BASEURL . '/auth');
                 exit();
             } else {
-                $query = $this->dbh->prepare("SELECT * FROM user WHERE email=:em");
+                $query = $this->dbh->prepare("SELECT * FROM user WHERE email=:em OR nomor_induk=:nin");
                 $query->execute([
-                    'em' => $data['email']
+                    'em' => $data['email'],
+                    'nin' => $data['email']
                 ]);
                 if ($query->rowCount() > 0) {
                     $user_data = $query->fetch(PDO::FETCH_ASSOC);
                     if (password_verify($data['pass'], $user_data['password'])) {
                         $_SESSION['auth'] = [
                             'token' => $this->generateToken(),
+                            'nomor_induk' => $user_data['nomor_induk'],
                             'email' => $user_data['email'],
                             'name' => $user_data['name']
                         ];
                         header('Location: ' . BASEURL . '/dashboard');
                         exit();
                     } else {
-                        $_SESSION['error'] = "Email / Password Salah!";
+                        $_SESSION['error'] = "Email / Nomor Induk / Password Salah!";
                         header('Location: ' . BASEURL . '/auth');
                         exit();
                     }
                 } else {
-                    $_SESSION['error'] = "Email / Password Salah!";
+                    $_SESSION['error'] = "Email / Nomor Induk / Password Salah!";
                     header('Location: ' . BASEURL . '/auth');
                     exit();
                 }

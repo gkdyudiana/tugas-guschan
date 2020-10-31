@@ -21,7 +21,7 @@
     <!-- Login Area -->
 
     <div class="container-fluid">
-        <h2 class="text-center p-3">Sistem Informasi <br> Online Pelajar</h2>
+        <h2 class="text-center p-3">Sistem Informasi<br>Online Pelajar</h2>
         <?php if (isset($_SESSION['error'])) { ?>
             <div class="alert alert-danger" role="alert">
                 <?= $_SESSION['error']; ?>
@@ -32,15 +32,16 @@
         ?>
         <form action="<?= BASEURL; ?>/auth/middleware" method="POST">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off">
-                <small id="emailHelp" class="form-text text-muted">Please input your email address.</small>
+                <label for="exampleInputEmail1">Alamat Email / Nomor Induk</label>
+                <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off">
+                <small id="emailHelp" class="form-text text-muted">Masukkan alamat email atau nomor induk Anda!</small>
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" autocomplete="off">
+                <small id="emailHelp" class="form-text text-muted">Masukkan sandi Anda!</small>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">SIGN IN</button>
+            <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">MASUK</button>
         </form>
     </div>
 

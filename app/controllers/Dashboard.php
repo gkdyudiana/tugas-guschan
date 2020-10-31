@@ -14,6 +14,14 @@ class Dashboard extends Controller
     public function index()
     {
         $this->sessionCheck();
-        $this->view('dashboard/home');
+        $data = $this->model('User_model')->getUserById($_SESSION['auth']['nomor_induk']);
+        $this->view('dashboard/home', $data);
+    }
+
+    public function update()
+    {
+        $this->sessionCheck();
+        $data = $this->model('User_model')->getUserById($_SESSION['auth']['nomor_induk']);
+        $this->view('dashboard/update', $data);
     }
 }
