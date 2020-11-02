@@ -25,4 +25,18 @@ class Controller extends Databases
 
         return $rand_string;
     }
+
+    public static function secureUrl($value, $action)
+    {
+        $key = hash('sha256', 'XQ62K19mQ1');
+        $iv = substr(hash('sha256', 'F66CE19546FDF'), 0, 16);
+        $output = false;
+        if ($action == 'e') {
+            $output = base64_encode(openssl_encrypt($value, "AES-256-CBC", $key, 0, $iv));
+        } else {
+            $output = openssl_decrypt(base64_decode($value), "AES-256-CBC", $key, 0, $iv);
+        }
+
+        return $output;
+    }
 }

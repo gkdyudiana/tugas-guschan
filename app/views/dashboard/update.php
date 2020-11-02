@@ -12,6 +12,9 @@
     <!-- AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="<?= CSS; ?>/dashboard.css">
 
@@ -25,10 +28,19 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>dashboard</title>
+    <title>Update Biodata</title>
 </head>
 
 <body>
+
+    <!-- Messages -->
+    <?php if (isset($_SESSION['success'])) { ?>
+        <div class="flash-data" data-flashdata="<?= $_SESSION['success']; ?>"></div>
+    <?php
+        unset($_SESSION['success']);
+    }
+    ?>
+    <!-- End Messages -->
 
     <!-- Start Navbar -->
 
@@ -44,7 +56,7 @@
                         <a class="nav-link" href="<?= BASEURL; ?>/dashboard">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">E-Book</a>
+                        <a class="nav-link" href="<?= BASEURL; ?>/dashboard/ebook">E-Book</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-block btn-outline-danger" href="<?= BASEURL; ?>/auth/logout">KELUAR</a>
@@ -68,7 +80,8 @@
                 <li class="breadcrumb-item active" aria-current="page"><a href="<?= $_SERVER['REQUEST_URI']; ?>">Update</a></li>
             </ol>
         </nav>
-        <form action="" method="POST">
+        <form action="<?= BASEURL; ?>/dashboard/edit" method="POST" id="form-update">
+            <input type="hidden" name="submit">
             <div class="form-group">
                 <label for="nomor_induk">*Nomor Induk</label>
                 <input type="text" name="nomor_induk" class="form-control" id="nomor_induk" value="<?= $data['nomor_induk']; ?>" aria-describedby="hint" readonly>
@@ -92,8 +105,8 @@
                 <input type="text" class="form-control" name="tempat_lahir" value="<?= $data['birth_place']; ?>" id="tempat_lahir" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="tempat_lahir">*Agama</label>
-                <select class="form-control" id="tempat_lahir" name="tempat_lahir">
+                <label for="agama">*Agama</label>
+                <select class="form-control" id="agama" name="agama">
                     <?php if ($data['religion'] == 'hindu') : ?>
                         <option value="hindu" selected>Hindu</option>
                         <option value="islam">Islam</option>
@@ -176,7 +189,7 @@
                 <label for="address">*Alamat</label>
                 <textarea class="form-control" name="address" id="address" rows="4"><?= $data['address']; ?></textarea>
             </div>
-            <button type="submit" name="submit" class="btn btn-dark btn-block btn-lg rounded-pill">Simpan</button>
+            <button type="submit" name="submit" id="btn-update" class="btn btn-dark btn-block btn-lg rounded-pill">Simpan</button>
         </form>
     </div>
     <!-- End Form -->
@@ -188,7 +201,7 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
@@ -200,6 +213,53 @@
 
     <script>
         AOS.init();
+
+        $('#btn-update').click(function(e) {
+            e.preventDefault();
+            const href = $('#form-update').attr('action');
+
+            Swal.fire({
+                title: 'Simpan Perubahan?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: `Simpan`,
+                denyButtonText: `Batal`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var data = $('#form-update').serializeArray();
+                    $.ajax({
+                        url: href,
+                        type: "POST",
+                        data: data,
+                        success: function(data) {
+                            if (data == "success") {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    showConfirmButton: true,
+                                    text: 'Data berhasil diperbaharui',
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload();
+                                    }
+                                })
+                            } else {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    showConfirmButton: true,
+                                    text: 'Data Gagal diperbaharui',
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload();
+                                    }
+                                })
+                            }
+                        }
+                    });
+                }
+            })
+        });
     </script>
 
 </body>

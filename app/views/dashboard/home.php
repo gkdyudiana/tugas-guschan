@@ -25,10 +25,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>dashboard</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
+
+
 
     <!-- Start Navbar -->
 
@@ -41,10 +43,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="<?= BASEURL; ?>/dashboard">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">E-Book</a>
+                        <a class="nav-link" href="<?= BASEURL; ?>/dashboard/ebook">E-Book</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-block btn-outline-danger" href="<?= BASEURL; ?>/auth/logout">KELUAR</a>
@@ -59,6 +61,7 @@
     </div>
 
     <!-- End Navbar -->
+
 
     <!-- Start Informations Dashboard -->
     <div class="container info-wrapper rounded mb-3" data-aos="fade-down" data-aos-duration="2000">
@@ -77,28 +80,34 @@
             <div class="col-lg-8 bg-primary p-4 rounded-right">
                 <table class="biodata" border="0">
                     <tr>
-                        <td>Nomor induk : <?= $data['nomor_induk']; ?></td>
+                        <td>Nomor induk : <?= $data[0]['nomor_induk']; ?></td>
                     </tr>
                     <tr>
-                        <td>Email : <?= $data['email']; ?></td>
+                        <td>Email : <?= $data[0]['email']; ?></td>
                     </tr>
                     <tr>
-                        <td>Tanggal Lahir : <?= $data['birth_date']; ?></td>
+                        <td>Tanggal Lahir : <?= $data[0]['birth_date']; ?></td>
                     </tr>
                     <tr>
-                        <td>Tempat Lahir : <?= $data['birth_place']; ?></td>
+                        <td>Tempat Lahir : <?= $data[0]['birth_place']; ?></td>
                     </tr>
                     <tr>
-                        <td>Jenis kelamin : <?= $data['gender'] ?></td>
+                        <td>Jenis kelamin : <?= $data[0]['gender'] ?></td>
                     </tr>
                     <tr>
-                        <td>Agama : <?= $data['religion']; ?></td>
+                        <td>Agama : <?= $data[0]['religion']; ?></td>
                     </tr>
                     <tr>
-                        <td>Alamat : <?= $data['address']; ?></td>
+                        <td>Alamat : <?= $data[0]['address']; ?></td>
                     </tr>
                     <tr>
-                        <td>No. Telp : <?= $data['telp']; ?></td>
+                        <td>No. Telp : <?= $data[0]['telp']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Kelas : <?= $data[0]['kelas']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Wali Kelas : <?= $data[4]['nama_guru']; ?></td>
                     </tr>
                 </table>
             </div>
@@ -106,21 +115,64 @@
     </div>
 
     <div class="container mt-5 mb-5">
+        <div class="row mb-5" data-aos="fade-up-left" data-aos-duration="2000">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-dark text-white text-center">
+                        <i class="far fa-calendar"></i>&nbsp;Jadwal pelajaran
+                    </div>
+                    <div class="card-body overflow-auto">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Hari</th>
+                                    <th scope="col">Jam</th>
+                                    <th scope="col">Kode</th>
+                                    <th scope="col">Mata Pelajaran</th>
+                                    <th scope="col">Pengajar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                foreach ($data[2] as $row) :
+                                ?>
+                                    <tr>
+                                        <th scope="row"><?= $no; ?></th>
+                                        <td><?= $row['hari']; ?></td>
+                                        <td><?= $row['jam']; ?></td>
+                                        <td><?= $row['mapel']; ?></td>
+                                        <td><?= $row['nama_mapel']; ?></td>
+                                        <td><?= $row['nama_guru']; ?></td>
+                                    </tr>
+                                <?php
+                                    $no++;
+                                endforeach
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-lg-4" data-aos="fade-right" data-aos-duration="2000">
                 <div class="card mb-3" style="width: 100%;">
                     <div class="card-header text-center bg-primary text-white">
-                        Mata Pelajaran
+                        <i class="far fa-calendar-check"></i>&nbsp;Today
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Basis Data</li>
-                        <li class="list-group-item">Sistem Operasi</li>
-                        <li class="list-group-item">Jaringan Komputer</li>
+                        <?php foreach ($data[3] as $row) :
+                        ?>
+                            <li class="list-group-item"><?= $row['nama_mapel'] . " (" . $row['kelas'] . ")"; ?></li>
+                        <?php endforeach;
+                        ?>
                     </ul>
                 </div>
                 <div class="card mb-3" style="width: 100%;">
                     <div class="card-header text-center bg-primary text-white">
-                        Daftar Tugas
+                        <i class="fas fa-tasks"></i>&nbsp;Tugas
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Basis Data</li>
@@ -128,19 +180,36 @@
                 </div>
             </div>
             <div class="col-lg-8" data-aos="fade-left" data-aos-duration="2000">
-                <div class="card text-center">
-                    <div class="card-header bg-warning text-white">
-                        Pengumuman
+                <div class="card">
+                    <div class="card-header text-center bg-danger text-white">
+                        <i class="fas fa-bullhorn"></i>&nbsp;Pengumuman
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <div class="card">
+                            <div class="card">
+                                <?php foreach ($data[1] as $row) : ?>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $row['title'] ?></h5>
+                                        <p class="card-text readmore"><?= $row['descriptions']; ?></p>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <?= $row['date']; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- End Informations Dashboard -->
+
+    <!-- Start Footer -->
+    <div class="footer">
+        <p class="text-secondary">&copy; 2020 - All Rights Reserved by Dichan</p>
+    </div>
+    <!-- End Footer -->
 
 
 
@@ -156,6 +225,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Readmore JS -->
+    <script src="<?= JS; ?>/readMoreJS.min.js"></script>
 
     <script>
         AOS.init();
@@ -165,6 +236,14 @@
             typeSpeed: 150,
             loop: true,
             showCursor: false
+        });
+
+        $readMoreJS.init({
+            target: '.readmore',
+            numOfWords: 10,
+            toggle: true,
+            moreLink: '<p class="badge badge-pill badge-dark p-2 float-right">Read more</p>',
+            lessLink: '<p class="badge badge-pill badge-dark p-2 float-right">Read less</p>'
         });
     </script>
 

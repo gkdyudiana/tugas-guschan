@@ -34,12 +34,11 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">Alamat Email / Nomor Induk</label>
                 <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off">
-                <small id="emailHelp" class="form-text text-muted">Masukkan alamat email atau nomor induk Anda!</small>
+                <small id="emailHelp" class="form-text text-muted">Masukkan alamat email atau nomor induk Anda.</small>
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" autocomplete="off">
-                <small id="emailHelp" class="form-text text-muted">Masukkan sandi Anda!</small>
             </div>
             <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">MASUK</button>
         </form>

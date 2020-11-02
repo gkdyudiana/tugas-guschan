@@ -41,7 +41,7 @@ class Auth extends Controller
                         $_SESSION['auth'] = [
                             'token' => $this->generateToken(),
                             'nomor_induk' => $user_data['nomor_induk'],
-                            'email' => $user_data['email'],
+                            'kelas' => $user_data['kelas'],
                             'name' => $user_data['name']
                         ];
                         header('Location: ' . BASEURL . '/dashboard');

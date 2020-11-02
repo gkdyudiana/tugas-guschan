@@ -57,3 +57,23 @@
 .display-4 {
     font-size: 30pt !important;
 }
+
+.footer {
+    width: 100%;
+    height: 60px;
+    margin-top: 50px;
+    /* padding: 15px; */
+}
+
+.footer p {
+    font-size: 18px;
+    text-align: center;
+    font-weight: lighter;
+    padding: 0;
+    margin: 0;
+}
+
+.search-wrapper {
+    height: 100% !important;
+    width: 100% !important;
+}
