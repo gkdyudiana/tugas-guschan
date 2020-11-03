@@ -99,4 +99,28 @@ class User_model extends Controller
         ]);
         return $query->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function searchBook($judul)
+    {
+        $query = $this->dbh->prepare("SELECT * FROM ebook WHERE judul_buku LIKE :jb");
+        $query->execute(['jb' => '%' . $judul . '%']);
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        if ($query->rowCount() > 0) :
+            foreach ($data as $row) :
+                echo '
+                <div class="col-lg-3 mb-3 d-flex justify-content-center">
+                    <div class="card" style="width: 15rem;">
+                        <img src="' . $row['cover'] . '" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $row['judul_buku'] . '</h5>
+                            <p class="card-text">' . $row['penulis_buku'] . '</p>
+                            <a href="' . BASEURL . '/dashboard/detail_ebook?id=' . Controller::secureUrl($row['id_buku'], 'e') . '" style="border-radius: 0px !important;" class="btn btn-primary btn-block"><i class="fas fa-info-circle"></i>&nbsp;detail</a>
+                        </div>
+                    </div>
+                </div>';
+            endforeach;
+        else :
+            echo 'tidak ditemukan';
+        endif;
+    }
 }

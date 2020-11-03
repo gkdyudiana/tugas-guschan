@@ -48,4 +48,9 @@ class Dashboard extends Controller
         $data = $this->model('User_model')->getDetailBook($_GET['id']);
         $this->view('dashboard/detail_ebook', $data);
     }
+
+    public function search_ebook()
+    {
+        $this->model('User_model')->searchBook($_GET['judul']);
+    }
 }

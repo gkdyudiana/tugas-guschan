@@ -30,8 +30,6 @@
 
 <body>
 
-
-
     <!-- Start Navbar -->
 
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent border-bottom" data-aos="fade-right" data-aos-duration="2000">
@@ -62,7 +60,7 @@
     <!-- End Landing Page -->
     <!-- Start Footer -->
     <div class="footer">
-        <p class="text-secondary">&copy; 2020 - All Rights Reserved by Dichan</p>
+        <p class="text-secondary">&copy; 2020 - All Rights Reserved by SiNolep Team</p>
     </div>
     <!-- End Footer -->
 

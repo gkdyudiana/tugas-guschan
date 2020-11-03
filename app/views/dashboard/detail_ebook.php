@@ -81,10 +81,10 @@
             </div>
         </div>
     </div>
-    <div class="container" data-aos="fade-left" data-aos-duration="2000">
+    <div class="container" data-aos="fade-up" data-aos-duration="2000">
         <div class="row">
             <div class="col">
-                <h6 class="text-dark mt-1">Deskripsi :</h6>
+                <button class="btn btn-info btn-block" style="border-radius: 0px !important;"> Deskripsi</button>
                 <p class="mt-3" style="text-indent: 50px;text-align:justify;"><?= $data['deskripsi']; ?></p>
             </div>
         </div>
@@ -93,7 +93,7 @@
 
     <!-- Start Footer -->
     <div class="footer">
-        <p class="text-secondary">&copy; 2020 - All Rights Reserved by Dichan</p>
+        <p class="text-secondary">&copy; 2020 - All Rights Reserved by SiNolep Team</p>
     </div>
     <!-- End Footer -->
 

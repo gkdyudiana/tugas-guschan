@@ -9,6 +9,14 @@
     <!-- CSS -->
     <link rel="stylesheet" href="<?= CSS ?>/login.css">
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/fef9209b86.js" crossorigin="anonymous"></script>
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Type JS -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -20,7 +28,8 @@
 
     <!-- Login Area -->
 
-    <div class="container-fluid">
+    <div class="container-fluid" data-aos="fade-down" data-aos-duration="2000">
+        <a class="text-dark d-flex justify-content-center"><i class="fas fa-3x fa-book-reader"></i>&nbsp;</a>
         <h2 class="text-center p-3">Sistem Informasi<br>Online Pelajar</h2>
         <?php if (isset($_SESSION['error'])) { ?>
             <div class="alert alert-danger" role="alert">
@@ -46,6 +55,11 @@
 
     <!-- End Login Area -->
 
+    <!-- Start Footer -->
+    <div class="footer d-flex justify-content-center mt-5">
+        <p class="text-secondary">&copy; 2020 - All Rights Reserved by SiNolep Team</p>
+    </div>
+    <!-- End Footer -->
 
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -59,6 +73,15 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     -->
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Readmore JS -->
+    <script src="<?= JS; ?>/readMoreJS.min.js"></script>
+
+    <script>
+        AOS.init();
+    </script>
+
 </body>
 
 </html>

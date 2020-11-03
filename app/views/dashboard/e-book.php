@@ -63,7 +63,7 @@
     <div class="jumbotron search-wrapper">
         <div class="container d-flex justify-content-center" data-aos="fade-down" data-aos-duration="2000">
             <form class=" form-inline">
-                <input class="form-control mr-2 rounded-pill" style="width: 80% !important;" type="search" placeholder="Cari E-Book" aria-label="Search">
+                <input class="form-control mr-2 rounded-pill" style="width: 80% !important;" type="search" id="search" placeholder="Cari E-Book" aria-label="Search">
                 <button class="btn btn-warning my-2 my-sm-0 rounded-pill" type="submit"><i class="fas fa-search"></i></button>
             </form>
         </div>
@@ -79,7 +79,7 @@
                 <li class="breadcrumb-item active" aria-current="page"><a href="<?= $_SERVER['REQUEST_URI']; ?>">E-Book</a></li>
             </ol>
         </nav>
-        <div class="row" data-aos="fade-up" data-aos-duration="2000">
+        <div class="row" data-aos="fade-up" data-aos-duration="2000" id="result">
             <?php
             foreach ($data as $row) :
             ?>
@@ -102,7 +102,7 @@
 
     <!-- Start Footer -->
     <div class="footer">
-        <p class="text-secondary">&copy; 2020 - All Rights Reserved by Dichan</p>
+        <p class="text-secondary">&copy; 2020 - All Rights Reserved by SiNolep Team</p>
     </div>
     <!-- End Footer -->
 
@@ -111,7 +111,7 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
@@ -125,6 +125,16 @@
 
     <script>
         AOS.init();
+
+        $('#search').on('keyup', function() {
+            $.ajax({
+                url: '<?= BASEURL; ?>/dashboard/search_ebook?judul=' + $(this).val(),
+                type: 'GET',
+                success: function(data) {
+                    $('#result').html(data);
+                }
+            });
+        });
     </script>
 
 </body>
