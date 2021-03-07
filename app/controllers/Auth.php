@@ -26,7 +26,7 @@ class Auth extends Controller
             ];
 
             if (preg_match('/[\'^£$%&*()}";:!`{#~?><>,|=_+¬-]/', $data['email'])) {
-                $_SESSION['error'] = "Email / Nomor Induk / Password tidak valid!";
+                $_SESSION['error'] = "Email / Nomor Induk tidak valid!";
                 header('Location: ' . BASEURL . '/auth');
                 exit();
             } else {
